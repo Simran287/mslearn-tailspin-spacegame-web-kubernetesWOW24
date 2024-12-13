@@ -24,7 +24,7 @@ stages:
         buildContext: $(Build.Repository.LocalPath)
         repository: $(webRepository)
         dockerfile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.Web/Dockerfile'
-        containerRegistry: 'Container Registry Connection'
+        containerRegistry: 'Container Registry Connection2879'
         tags: |
           $(tag)
 
@@ -35,7 +35,7 @@ stages:
         buildContext: $(Build.Repository.LocalPath)
         repository: $(leaderboardRepository)
         dockerfile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.LeaderboardContainer/Dockerfile'
-        containerRegistry: 'Container Registry Connection'
+        containerRegistry: 'Container Registry Connection2879'
         tags: |
           $(tag)
       
@@ -50,7 +50,7 @@ stages:
     displayName: Deploy
     pool:
       vmImage: 'ubuntu-20.04'
-    environment: 'spike.default'
+    environment: 'Dev'
     variables:
     - group: Release2879
     strategy:
@@ -71,8 +71,8 @@ stages:
               action: createSecret
               connectionType: azureResourceManager
               secretName: $(imagePullSecret)
-              dockerRegistryEndpoint: 'Container Registry Connection'
-              azureSubscriptionConnection: 'Kubernetes Cluster Connection'
+              dockerRegistryEndpoint: 'Container Registry Connection2879'
+              azureSubscriptionConnection: 'Kubernetes Cluster Connection2879'
               azureResourceGroup: 'tailspin-space-game-rg'
               kubernetesCluster: 'tailspinspacegame-24591'
               namespace: 'default'
@@ -82,7 +82,7 @@ stages:
             inputs:
               action: deploy
               connectionType: azureResourceManager
-              azureSubscriptionConnection: 'Kubernetes Cluster Connection'
+              azureSubscriptionConnection: 'Kubernetes Cluster Connection2879'
               azureResourceGroup: 'tailspin-space-game-rg'
               kubernetesCluster: 'tailspinspacegame-24591'
               namespace: 'default'
